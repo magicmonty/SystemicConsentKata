@@ -10,6 +10,7 @@ namespace Test
         private Moderator _sut;
         private static readonly Option CHINESE = new Option ("Chinese");
         private static readonly Option MEXICAN = new Option ("Mexican");
+        private static readonly Option EMPTY = new Option (string.Empty);
 
         [SetUp]
         public void SetUp ()
@@ -47,6 +48,26 @@ namespace Test
             Assert.That (_sut.Options.Contains (CHINESE), Is.True);
             Assert.That (_sut.Options.Contains (MEXICAN), Is.True);
         }       
+
+        [Test]
+        public void ShouldCloseInputOfOptionsIfEmptyOptionIsAdded ()
+        {
+            _sut.AddOption (EMPTY);
+
+            Assert.That (_sut.IsClosed, Is.True);
+        }
+
+        
+        [Test]
+        public void ShouldNotAllowNewOptionsOnClosedInput ()
+        {
+            _sut.AddOption (EMPTY);
+            _sut.AddOption (CHINESE);
+            
+            Assert.That (_sut.Options.Count (), Is.EqualTo (0));
+        }
+
+
     }
 }
 
