@@ -7,10 +7,10 @@ namespace Test
 {
     public class Moderator
     {
-        public IEnumerable<string> Options { get { return _options; } }
-        private IEnumerable<string> _options = new List<string> ();
+        public IEnumerable<Option> Options { get { return _options; } }
+        private IEnumerable<Option> _options = new List<Option> ();
 
-        public void AddOption (string option)
+        public void AddOption (Option option)
         {
             var asList = _options.ToList ();
             asList.Add (option);

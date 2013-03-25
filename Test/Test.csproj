@@ -38,6 +38,8 @@
   <ItemGroup>
     <Compile Include="ModeratorTests.cs" />
     <Compile Include="Moderator.cs" />
+    <Compile Include="Option.cs" />
+    <Compile Include="OptionTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>
