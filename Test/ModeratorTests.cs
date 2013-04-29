@@ -5,10 +5,27 @@ using Core = SystemicConsent.Core;
 
 namespace Test
 {
+    class MockProvider : Core.IOptionsProvider
+    {
+        public bool StoreIsRun;
+
+        public Core.Options GetOptions()
+        {
+            return null;
+        }
+
+        public void StoreOptions(Core.Options options)
+        {
+            StoreIsRun = true;
+        }
+    }
+
     [TestFixture]
     public class Moderator
     {
         private Impl.Moderator _sut;
+        private MockProvider _provider;
+
         private static readonly Core.Option CHINESE = new Core.Option("Chinese");
         private static readonly Core.Option MEXICAN = new Core.Option("Mexican");
         private static readonly Core.Option EMPTY = new Core.Option(string.Empty);
@@ -16,7 +33,8 @@ namespace Test
         [SetUp]
         public void SetUp()
         {
-            _sut = new Impl.Moderator(); 
+            _provider = new MockProvider();
+            _sut = new Impl.Moderator(_provider); 
         }
 
         [Test]
@@ -68,7 +86,15 @@ namespace Test
             Assert.That(_sut.Options.Count(), Is.EqualTo(0));
         }
 
+        [Test]
+        public void ShouldPublishToOptionsProviderOnPublishIfClosed()
+        {
+            _sut.AddOption(CHINESE);
+            _sut.AddOption(EMPTY);
+            _sut.Publish();
 
+            Assert.That(_provider.StoreIsRun, Is.True);
+        }
     }
 }
 

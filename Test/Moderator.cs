@@ -5,10 +5,17 @@ namespace SystemicConsent.Moderator
 {
     public class Moderator
     {
+        private readonly IOptionsProvider _optionsProvider;
+
         public static readonly Option EMPTY = new Option(string.Empty);
 
         public IEnumerable<Option> Options { get { return _options; } }
         private IEnumerable<Option> _options = new Options();
+
+        public Moderator(IOptionsProvider optionsProvider)
+        {
+            _optionsProvider = optionsProvider;
+        }
 
         public bool IsClosed {
             get { return _isClosed; }
@@ -25,10 +32,15 @@ namespace SystemicConsent.Moderator
             }
         }
 
-        void CloseIfEmptyOption(Option option)
+        private void CloseIfEmptyOption(Option option)
         {
             if (option == EMPTY)
                 _isClosed = true;
+        }
+
+        public void Publish()
+        {
+            _optionsProvider.StoreOptions(_options as Options);
         }
     }
 
