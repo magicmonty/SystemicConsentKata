@@ -16,7 +16,7 @@ namespace Test
         [SetUp]
         public void SetUp()
         {
-            _sut = new Impl.Moderator();
+            _sut = new Impl.Moderator(); 
         }
 
         [Test]
