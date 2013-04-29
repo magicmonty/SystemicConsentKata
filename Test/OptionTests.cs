@@ -42,7 +42,8 @@ namespace Test
         public void ShouldIncreaseValueByGivenValueOnVote()
         {
             _sut.Vote(5);
-            Assert.That(_sut.Value, Is.EqualTo(5));
+            _sut.Vote(4);
+            Assert.That(_sut.Value, Is.EqualTo(9));
         }
     }
 }
