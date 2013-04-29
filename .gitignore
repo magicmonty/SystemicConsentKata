@@ -3,5 +3,4 @@ test-results
 SystemicConsent.userprefs
 .nuget/
 *.DotSettings
-packages.config
 packages/
