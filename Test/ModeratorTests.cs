@@ -132,14 +132,40 @@ namespace Test
             _provider.StoreOptions(options);
 
             var recommendation = _sut.GetRecommendation();
-            Assert.That(recommendation, Is.EqualTo(option2));
-            Assert.That(recommendation.Value, Is.EqualTo(4));
+            Assert.That(recommendation.Count(), Is.EqualTo(1));
+            Assert.That(recommendation.First(), Is.EqualTo(option2));
+            Assert.That(recommendation.First().Value, Is.EqualTo(4));
         }
 
         [Test]
-        public void ShouldReturnEmptyOptionOnGetRecommendationIfOptionsAreEmpty()
+        public void ShouldReturnEmptyListOnGetRecommendationIfOptionsAreEmpty()
         {
-            Assert.That(_sut.GetRecommendation(), Is.EqualTo(EMPTY));
+            Assert.That(_sut.GetRecommendation(), Is.EqualTo(Enumerable.Empty<Core.Option>()));
+        }
+
+        private Core.Option CreateOption(string name, int value)
+        {
+            var result = new Core.Option(name);
+            result.Vote(value);
+
+            return result;
+        }
+
+        [Test]
+        public void ShouldReturnMultipleOptionsIfResistanceIsSame()
+        {
+            var options = new Core.Options();
+            var option1 = CreateOption("Chinese", 5);
+            var option2 = CreateOption("Italian", 6);
+            var option3 = CreateOption("Mexican", 5);
+
+            options.Add(option1);
+            options.Add(option2);
+            options.Add(option3);
+
+            _provider.StoreOptions(options);
+
+            Assert.That(_sut.GetRecommendation().Count(), Is.EqualTo(2));
         }
     }
 }

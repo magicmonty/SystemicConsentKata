@@ -46,14 +46,17 @@ namespace SystemicConsent.Moderator
             }
         }
 
-        public Option GetRecommendation()
+        public IEnumerable<Option> GetRecommendation()
         {
             var options = _optionsProvider.GetOptions() ?? new Options();
-            Option result = options.OrderBy(option => option.Value)
-                                   .FirstOrDefault();
 
-            if ((object)result == (object)null) {
-                result = new Option(string.Empty);
+            var result = new List<Option>();
+            var leastResistance = 1000;
+            foreach (var option in options.OrderBy(o => o.Value)) {
+                if (option.Value <= leastResistance) {
+                    leastResistance = option.Value;
+                    result.Add(option);
+                }
             }
 
             return result;
