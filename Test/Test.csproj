@@ -38,12 +38,14 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IVoterClient.cs" />
     <Compile Include="ModeratorTests.cs" />
     <Compile Include="Moderator.cs" />
     <Compile Include="Option.cs" />
     <Compile Include="OptionTests.cs" />
     <Compile Include="OptionsTests.cs" />
     <Compile Include="Options.cs" />
+    <Compile Include="VoterClientTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
