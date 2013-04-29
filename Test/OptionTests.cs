@@ -6,23 +6,43 @@ namespace Test
     [TestFixture()]
     public class Option
     {
+        private Impl.Option _sut;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _sut = new Impl.Option("Hallo Welt");
+        }
+
         [Test]
         public void ShouldHaveTheCorrectName()
         {
-            var option = new Impl.Option("Hallo Welt");
-            Assert.That(option.Name, Is.EqualTo("Hallo Welt"));
+            Assert.That(_sut.Name, Is.EqualTo("Hallo Welt"));
         }
 
         [Test]
         public void ShouldBeEqualIfNameIsEqual()
         {
-            Assert.That(new Impl.Option("Test").Equals(new Impl.Option("Test")), Is.True);
+            Assert.That(_sut.Equals(new Impl.Option("Hallo Welt")), Is.True);
         }
 
         [Test]
         public void ShouldBeSameIfNameIsEqual()
         {
-            Assert.That(new Impl.Option("Test") == new Impl.Option("Test"), Is.True);
+            Assert.That(_sut == new Impl.Option("Hallo Welt"), Is.True);
+        }
+
+        [Test]
+        public void ShouldHaveAValue()
+        {
+            Assert.That(_sut.Value, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void ShouldIncreaseValueByGivenValueOnVote()
+        {
+            _sut.Vote(5);
+            Assert.That(_sut.Value, Is.EqualTo(5));
         }
     }
 }
