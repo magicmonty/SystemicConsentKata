@@ -116,6 +116,31 @@ namespace Test
             
             Assert.That(_provider.GetOptions(), Is.EqualTo(_sut.Options));
         }
+
+        [Test]
+        public void ShouldReturnTheOptionWithTheLeastValueOnGetRecommendation()
+        {
+            var options = new Core.Options();
+            var option1 = new Core.Option("Chinese");
+            var option2 = new Core.Option("Italian");
+            option1.Vote(6);
+            option2.Vote(4);
+
+            options.Add(option1);
+            options.Add(option2);
+
+            _provider.StoreOptions(options);
+
+            var recommendation = _sut.GetRecommendation();
+            Assert.That(recommendation, Is.EqualTo(option2));
+            Assert.That(recommendation.Value, Is.EqualTo(4));
+        }
+
+        [Test]
+        public void ShouldReturnEmptyOptionOnGetRecommendationIfOptionsAreEmpty()
+        {
+            Assert.That(_sut.GetRecommendation(), Is.EqualTo(EMPTY));
+        }
     }
 }
 

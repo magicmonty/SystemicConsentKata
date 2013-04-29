@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using SystemicConsent.Core;
+using System.Linq;
 
 namespace SystemicConsent.Moderator
 {
@@ -43,6 +44,19 @@ namespace SystemicConsent.Moderator
             if (IsClosed) {
                 _optionsProvider.StoreOptions(_options as Options);
             }
+        }
+
+        public Option GetRecommendation()
+        {
+            var options = _optionsProvider.GetOptions() ?? new Options();
+            Option result = options.OrderBy(option => option.Value)
+                                   .FirstOrDefault();
+
+            if ((object)result == (object)null) {
+                result = new Option(string.Empty);
+            }
+
+            return result;
         }
     }
 
