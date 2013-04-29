@@ -40,7 +40,9 @@ namespace SystemicConsent.Moderator
 
         public void Publish()
         {
-            _optionsProvider.StoreOptions(_options as Options);
+            if (IsClosed) {
+                _optionsProvider.StoreOptions(_options as Options);
+            }
         }
     }
 

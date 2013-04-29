@@ -8,15 +8,17 @@ namespace Test
     class MockProvider : Core.IOptionsProvider
     {
         public bool StoreIsRun;
+        private Core.Options _options;
 
         public Core.Options GetOptions()
         {
-            return null;
+            return _options;
         }
 
         public void StoreOptions(Core.Options options)
         {
             StoreIsRun = true;
+            _options = options;
         }
     }
 
@@ -94,6 +96,25 @@ namespace Test
             _sut.Publish();
 
             Assert.That(_provider.StoreIsRun, Is.True);
+        }
+
+        [Test]
+        public void ShouldNotPublishToOptionsProviderOnPublishIfNotClosed()
+        {
+            _sut.AddOption(CHINESE);
+            _sut.Publish();
+            
+            Assert.That(_provider.StoreIsRun, Is.False);
+        }
+        
+        [Test]
+        public void ShouldPublishTheCorrectOptionsToOptionsProviderOnPublish()
+        {
+            _sut.AddOption(CHINESE);
+            _sut.AddOption(EMPTY);
+            _sut.Publish();
+            
+            Assert.That(_provider.GetOptions(), Is.EqualTo(_sut.Options));
         }
     }
 }
