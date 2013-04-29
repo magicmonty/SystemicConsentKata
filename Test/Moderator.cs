@@ -1,33 +1,31 @@
-using System;
-using NUnit.Framework;
 using System.Collections.Generic;
-using System.Linq;
+using SystemicConsent.Core;
 
-namespace Test
+namespace SystemicConsent.Moderator
 {
     public class Moderator
     {
-        public static readonly Option EMPTY = new Option (string.Empty);
+        public static readonly Option EMPTY = new Option(string.Empty);
 
         public IEnumerable<Option> Options { get { return _options; } }
-        private IEnumerable<Option> _options = new Options ();
+        private IEnumerable<Option> _options = new Options();
 
         public bool IsClosed {
             get { return _isClosed; }
         }
         private bool _isClosed;
 
-        public void AddOption (Option option)
+        public void AddOption(Option option)
         {
-            CloseIfEmptyOption (option);
+            CloseIfEmptyOption(option);
             if (!IsClosed) {
                 var asList = _options as Options;
-                asList.Add (option);
+                asList.Add(option);
                 _options = asList;
             }
         }
 
-        void CloseIfEmptyOption (Option option)
+        void CloseIfEmptyOption(Option option)
         {
             if (option == EMPTY)
                 _isClosed = true;

@@ -1,28 +1,28 @@
-using System;
 using NUnit.Framework;
+using Impl = SystemicConsent.Core;
 
 namespace Test
 {
     [TestFixture()]
-    public class OptionTests
+    public class Option
     {
         [Test]
-        public void ShouldHaveTheCorrectName ()
+        public void ShouldHaveTheCorrectName()
         {
-            var option = new Option ("Hallo Welt");
-            Assert.That (option.Name, Is.EqualTo ("Hallo Welt"));
+            var option = new Impl.Option("Hallo Welt");
+            Assert.That(option.Name, Is.EqualTo("Hallo Welt"));
         }
 
         [Test]
-        public void ShouldBeEqualIfNameIsEqual ()
+        public void ShouldBeEqualIfNameIsEqual()
         {
-            Assert.That (new Option ("Test").Equals (new Option ("Test")), Is.True);
+            Assert.That(new Impl.Option("Test").Equals(new Impl.Option("Test")), Is.True);
         }
 
         [Test]
-        public void ShouldBeSameIfNameIsEqual ()
+        public void ShouldBeSameIfNameIsEqual()
         {
-            Assert.That (new Option ("Test") == new Option ("Test"), Is.True);
+            Assert.That(new Impl.Option("Test") == new Impl.Option("Test"), Is.True);
         }
     }
 }
