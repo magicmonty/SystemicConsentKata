@@ -1,9 +1,11 @@
 using System;
 
-namespace Test
+namespace SystemicConsent.Core
 {
     public interface IOptionsProvider
     {
+        Options GetOptions();
+        void StoreOptions(Options options);
     }
 }
 

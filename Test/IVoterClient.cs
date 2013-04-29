@@ -7,8 +7,13 @@ namespace Test
 {
     interface IVoterClient
     {
-        Options GetOptions();
-
         void StartVoting();
+        bool CanVote { get; }
+        int AmountOfQuestion { get; }
+        bool IsInVoting { get;  }
+        SystemicConsent.Core.Option GetNextOption();
+        void VoteForCurrentOption(int p);
+        void Cast();
+        void Exit();
     }
 }

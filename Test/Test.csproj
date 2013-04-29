@@ -38,6 +38,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Client.cs" />
     <Compile Include="IVoterClient.cs" />
     <Compile Include="ModeratorTests.cs" />
     <Compile Include="Moderator.cs" />
@@ -46,6 +47,7 @@
     <Compile Include="OptionsTests.cs" />
     <Compile Include="Options.cs" />
     <Compile Include="VoterClientTests.cs" />
+    <Compile Include="IOptionsProvider.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

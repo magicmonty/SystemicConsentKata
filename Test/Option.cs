@@ -11,6 +11,9 @@ namespace SystemicConsent.Core
         public string Name { get { return _name; } }
         private readonly string _name;
 
+        public int Value { get { return _value; } }
+        private int _value = 0;
+
         public override bool Equals(object obj)
         {
             if (!(obj is Option))
@@ -33,6 +36,11 @@ namespace SystemicConsent.Core
         public static bool operator !=(Option option1, Option option2)
         {
             return !option1.Equals(option2);
+        }
+
+        public void Vote(int i)
+        {
+            _value += i;
         }
     }
 

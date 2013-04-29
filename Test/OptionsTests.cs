@@ -5,12 +5,14 @@ using Impl = SystemicConsent.Core;
 namespace Test
 {
     [TestFixture]
-    public class Options
+    public class OptionsTest
     {
         private Impl.Options _sut;
-        private static readonly Impl.Option CHINESE = new Impl.Option("Chinese");
-        private static readonly Impl.Option MEXICAN = new Impl.Option("Mexican");
-        private static readonly Impl.Option EMPTY = new Impl.Option(string.Empty);
+        internal static readonly Impl.Option CHINESE = new Impl.Option("Chinese");
+        internal static readonly Impl.Option MEXICAN = new Impl.Option("Mexican");
+        internal static readonly Impl.Option ITALIAN = new Impl.Option("Italian");
+
+        internal static readonly Impl.Option EMPTY = new Impl.Option(string.Empty);
 
         [SetUp]
         public void Setup()
