@@ -4,7 +4,7 @@ using Impl = SystemicConsent.Core;
 namespace Test
 {
     [TestFixture()]
-    public class Option
+    public class OptionTest
     {
         private Impl.Option _sut;
 
